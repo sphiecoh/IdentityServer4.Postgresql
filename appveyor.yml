@@ -1,0 +1,12 @@
+version: 1.0.{build}
+build_script:
+- ps: ./build.ps1
+test: off
+artifacts:
+- path: artifacts/packages/*.nupkg
+deploy:
+- provider: NuGet
+  server: https://www.myget.org/F/identity-postgresql
+  api_key:
+    secure: VqFm6FTyitFXk4vxIhruSmIzrnrCdzWx2nON0Y/UKAbNB7dwU2wW2Wid25cz/TR50NAA8NcthKILZXfKwvt5G+LcHcvFeeGxcpI7d19st8Q=
+  skip_symbols: true
