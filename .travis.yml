@@ -1,0 +1,15 @@
+language: csharp
+mono: 4.4.2
+dotnet: 1.0.0-preview2-003121
+sudo: required
+dist: trusty
+addons:
+  apt:
+    packages:
+    
+script: 
+    - chmod +x build.sh
+    - ./build.sh
+notifications:
+  email:
+    - sfiso.dlaba@gmail.com

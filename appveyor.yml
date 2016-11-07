@@ -6,7 +6,7 @@ artifacts:
 - path: artifacts/packages/*.nupkg
 deploy:
 - provider: NuGet
-  server: https://www.myget.org/F/identity-postgresql
+  server: https://www.myget.org/F/identity-postgresql/api/v2/package/
   api_key:
-    secure: VqFm6FTyitFXk4vxIhruSmIzrnrCdzWx2nON0Y/UKAbNB7dwU2wW2Wid25cz/TR50NAA8NcthKILZXfKwvt5G+LcHcvFeeGxcpI7d19st8Q=
+    secure: 6FUgwWE+SbScs3FSO59HSkQMlApDmYKeIHdVgwgvvDggtzYa+We875daTsQzDEaT3SgmnPlblq/vLKRgaFuAZ5FpKqUc6Mbbq5rbQfNZ7mM=
   skip_symbols: true
