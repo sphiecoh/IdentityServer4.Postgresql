@@ -15,7 +15,7 @@ namespace IdentityServer4.Postgresql.Stores
         }
         public async Task<Client> FindClientByIdAsync(string clientId)
         {
-           var client = await _documentSession.Query<Entities.Client>().FirstOrDefaultAsync(x => x.ClientId == clientId).ConfigureAwait(false);
+           var client = await _documentSession.LoadAsync<Entities.Client>(clientId).ConfigureAwait(false);
             return client?.ToModel();
         }
     }

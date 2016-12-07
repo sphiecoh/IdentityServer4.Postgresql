@@ -57,14 +57,17 @@ Task("Pack")
         Configuration = configuration,
         OutputDirectory = buildArtifacts,
     };
-
-    // add build suffix for CI builds
-    if(!isLocalBuild)
+     if(!isLocalBuild)
     {
         settings.VersionSuffix = "build" + AppVeyor.Environment.Build.Number.ToString().PadLeft(5,'0');
     }
-
-    DotNetCorePack(packPath, settings);
+   var projects = GetFiles("./src/**/*.xproj");
+    foreach(var project in projects)
+  {
+       DotNetCorePack(project.GetDirectory().FullPath, settings);
+   
+  }
+    
 });
 
 Task("Clean")

@@ -7,11 +7,8 @@ namespace IdentityServer4.Postgresql.Mappers
     {
         static PersistedGrantMappers()
         {
-            Mapper = new MapperConfiguration(config =>
-            {
-                config.CreateMap<Entities.PersistedGrant, PersistedGrant>(MemberList.Destination);
-                config.CreateMap<PersistedGrant, Entities.PersistedGrant>(MemberList.Source);
-            }).CreateMapper();
+            Mapper = new MapperConfiguration(cfg => cfg.AddProfile<PersistedGrantMapperProfile>())
+                 .CreateMapper();
         }
         public static IMapper Mapper { get; }
 

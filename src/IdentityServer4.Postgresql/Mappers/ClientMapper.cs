@@ -7,11 +7,8 @@ namespace IdentityServer4.Postgresql.Mappers
     {
         static ClientMapper()
         {
-            Mapper = new MapperConfiguration(config =>
-            {
-                config.CreateMap<Entities.Client, Client>(MemberList.Destination).ReverseMap();
-                    
-            }).CreateMapper();
+            Mapper = new MapperConfiguration(cfg => cfg.AddProfile<ClientMapperProfile>())
+               .CreateMapper();
         }
         public static IMapper Mapper { get; }
         public static Client ToModel(this Entities.Client client)

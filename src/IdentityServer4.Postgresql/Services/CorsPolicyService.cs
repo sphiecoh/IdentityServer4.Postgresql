@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using IdentityServer4.Postgresql.Entities;
 using System.Linq;
 using System.Threading.Tasks;
+using System;
 
 namespace IdentityServer4.Postgresql.Services
 {
@@ -18,9 +19,13 @@ namespace IdentityServer4.Postgresql.Services
         }
         public async Task<bool> IsOriginAllowedAsync(string origin)
         {
-            var origins = await _documentSession.Query<Client>().Select(x => x.AllowedCorsOrigins).ToListAsync();
-            _logger.LogInformation(1, "Found {length} origin(s)",origin.Length);
-            return origin.Contains(origin);
+            var origins = await _documentSession.Query<Client>().SelectMany(x => x.AllowedCorsOrigins.Select(y => y.Origin)).ToListAsync().ConfigureAwait(false);
+            var distinctOrigins = origins.Where(x => x != null).Distinct();
+            var isAllowed = distinctOrigins.Any(x => x.ToLower() == origin.ToLower());
+
+            _logger.LogDebug("Origin {origin} is allowed: {originAllowed}", origin, isAllowed);
+
+            return isAllowed;
 
         }
     }
