@@ -1,5 +1,11 @@
 ﻿{
   "version": "2.0.0-rc1-*",
+  "authors": [ "Sifiso Shezi" ],
+  "description": "Marten persistence layer for IdentityServer4 using postgresql as a document store",
+  "packOptions": {
+    "tags": [ "OAuth2", "OAuth 2.0", "OpenID Connect", "Security", "Identity", "IdentityServer", "Postgresql" ],
+    "projectUrl": "https://github.com/Sphiecoh/IdentityServer4.Postgresql"
+  },
 
   "dependencies": {
     "NETStandard.Library": "1.6.0",
@@ -9,7 +15,12 @@
   },
 
   "frameworks": {
-    "netstandard1.4": { },
+    "netstandard1.4": {
+      "imports": [
+        "dotnet5.6",
+        "portable-net45+win8"
+      ]
+    },
     "net46": {}
   }
 }
