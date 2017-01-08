@@ -5,7 +5,6 @@ var configuration   = Argument<string>("configuration", "Release");
 // GLOBAL VARIABLES
 ///////////////////////////////////////////////////////////////////////////////
 var isLocalBuild        = !AppVeyor.IsRunningOnAppVeyor;
-var packPath            = Directory("./src/IdentityServer4.Postgresql");
 var sourcePath          = Directory("./src");
 var testsPath           = Directory("test");
 var buildArtifacts      = Directory("./artifacts/packages");
@@ -42,7 +41,7 @@ Task("RunTests")
         {
             Configuration = configuration
         };
-        if(!isLocalBuild && !project.GetDirectory().FullPath.Contains("IntegrationTests"))
+        if(!isLocalBuild && project.GetDirectory().FullPath.Contains("IntegrationTests"))
             continue;
          DotNetCoreTest(project.GetDirectory().FullPath, settings);
     }
