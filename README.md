@@ -1,5 +1,7 @@
 # IdentityServer4.Postgresql
 
+[![Build status](https://ci.appveyor.com/api/projects/status/r4boyo3qkhbrmh8o/branch/master?svg=true)](https://ci.appveyor.com/project/sphiecoh/identityserver4-postgresql/branch/master)
+
 `Install-Package IdentityServer4.Postgresql`
 
 e.g AspNet Core
