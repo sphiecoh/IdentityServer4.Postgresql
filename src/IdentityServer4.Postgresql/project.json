@@ -8,8 +8,8 @@
   },
 
   "dependencies": {
-    "NETStandard.Library": "1.6.0",
-    "IdentityServer4": "1.0.0-rc4-update1",
+    "NETStandard.Library": "1.6.1",
+    "IdentityServer4": "1.0.0",
     "Marten": "1.1.3",
     "AutoMapper": "5.1.1"
   },

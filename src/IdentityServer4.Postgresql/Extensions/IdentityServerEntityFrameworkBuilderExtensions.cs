@@ -14,15 +14,18 @@ namespace IdentityServer4.Postgresql.Extensions
     public static class IdentityServerEntityFrameworkBuilderExtensions
     {
         public static IIdentityServerBuilder AddConfigurationStore(
-        this IIdentityServerBuilder builder , string connectionString)
+        this IIdentityServerBuilder builder, string connectionString = null)
         {
             builder.Services.AddTransient<IClientStore, ClientStore>();
             builder.Services.AddTransient<IResourceStore, ResourceStore>();
             builder.Services.AddTransient<ICorsPolicyService, CorsPolicyService>();
 
-            var store = DocumentStore.For(connectionString);
-            builder.Services.AddSingleton<IDocumentStore>(store);
-            builder.Services.AddTransient(_ => store.LightweightSession());
+            if (!string.IsNullOrEmpty(connectionString))
+            {
+                var store = DocumentStore.For(connectionString);
+                builder.Services.AddSingleton<IDocumentStore>(store);
+                builder.Services.AddTransient(_ => store.LightweightSession());
+            }
 
             return builder;
         }
