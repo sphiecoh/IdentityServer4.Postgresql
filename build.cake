@@ -42,8 +42,9 @@ Task("RunTests")
         {
             Configuration = configuration
         };
-
-        DotNetCoreTest(project.GetDirectory().FullPath, settings);
+        if(!isLocalBuild && !project.GetDirectory().FullPath.Contains("IntegrationTests"))
+            continue;
+         DotNetCoreTest(project.GetDirectory().FullPath, settings);
     }
 });
 

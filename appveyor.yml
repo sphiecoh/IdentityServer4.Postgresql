@@ -11,8 +11,8 @@ install:
   - 7z x %PG_PLV8_EXTENSION_ZIP_FILENAME%.zip
   - xcopy /s /y /d %PG_PLV8_EXTENSION_ZIP_FILENAME% "%POSTGRES_PATH%\"	
 build_script:
-- psql -U postgres -c "create database idsrv4_test;"
-- psql -U postgres -d %PG_DB% -c "create extension if not exists plv8;"
+#- psql -U postgres -c "create database idsrv4_test;"
+#- psql -U postgres -d %PG_DB% -c "create extension if not exists plv8;"
 - ps: ./build.ps1
 test: off
 artifacts:

@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using static IdentityServer4.IdentityServerConstants;
 
-namespace  IdentityServer4.Postgresql.Entities
+namespace IdentityServer4.Postgresql.Entities
 {
-    public class Client :EntityKey
+    public class Client : EntityKey
     {
         public Client()
         {
@@ -47,5 +47,6 @@ namespace  IdentityServer4.Postgresql.Entities
         public bool AlwaysSendClientClaims { get; set; }
         public bool PrefixClientClaims { get; set; } = true;
         public List<ClientCorsOrigin> AllowedCorsOrigins { get; set; }
+        public bool AlwaysIncludeUserClaimsInIdToken { get; set; }
     }
 }

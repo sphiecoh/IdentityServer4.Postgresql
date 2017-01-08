@@ -1,9 +1,11 @@
 # IdentityServer4.Postgresql
 
-`Install-Package IdentityServer4.Postgresql -Pre`
+`Install-Package IdentityServer4.Postgresql`
 
 e.g AspNet Core
 ```
+using IdentityServer4.Postgresql.Extensions;
+
 public void ConfigureServices(IServiceCollection services)
 {
    var builder = services.AddIdentityServer();
