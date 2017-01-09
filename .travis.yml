@@ -7,9 +7,9 @@ env:
 #- PGUSER=postgres
 #- POSTGRES_PASSWORD=skhokho
 before_script:
-  - sudo apt-get install postgresql-9.4-plv8 -y
-  - psql -c 'create database idsrv4_test;' -U postgres
-  - psql -d idsrv4_test -U postgres -c "create extension if not exists plv8;"
+  #- sudo apt-get install postgresql-9.4-plv8 -y
+  #- psql -c 'create database idsrv4_test;' -U postgres
+  #- psql -d idsrv4_test -U postgres -c "create extension if not exists plv8;"
   
 addons:
   postgresql: "9.4"
