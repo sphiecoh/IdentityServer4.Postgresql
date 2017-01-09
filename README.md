@@ -14,6 +14,10 @@ public void ConfigureServices(IServiceCollection services)
    var builder = services.AddIdentityServer();
    builder.AddConfigurationStore().AddOperationalStore();
 }
+public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+ {
+    app.UseIdentityServer():
+ }
  ```
  This will register all the `IdentityServer` stores and optionally a Marten's `IDocumentSession` as well as `IDocumentStore` if you pass a connection string;
  
