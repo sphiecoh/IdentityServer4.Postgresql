@@ -28,7 +28,7 @@ Task("Build")
     }
 });
 
-Task("RunUnitTests")
+Task("RunTests")
     .IsDependentOn("Restore")
     .IsDependentOn("Clean")
     .Does(() =>
