@@ -28,24 +28,38 @@ Task("Build")
     }
 });
 
-Task("RunTests")
+Task("RunUnitTests")
     .IsDependentOn("Restore")
-    .IsDependentOn("Clean")
     .Does(() =>
 {
     var projects = GetFiles("./test/**/project.json");
 
-    foreach(var project in projects)
+    foreach(var project in projects.GetDirectory().FullPath.Contains("UnitTests"))
 	{
         var settings = new DotNetCoreTestSettings
         {
             Configuration = configuration
         };
-        if((!isLocalBuild || !IsRunningOnWindows())  && project.GetDirectory().FullPath.Contains("IntegrationTests"))
-            continue;
-         DotNetCoreTest(project.GetDirectory().FullPath, settings);
+       DotNetCoreTest(project.GetDirectory().FullPath, settings);
     }
 });
+
+Task("RunIntegrationTests")
+    .IsDependentOn("Restore")
+    .Does(() =>
+{
+    var projects = GetFiles("./test/**/project.json");
+
+    foreach(var project in projects.GetDirectory().FullPath.Contains("IntegrationTests"))
+	{
+        var settings = new DotNetCoreTestSettings
+        {
+            Configuration = configuration
+        };
+       DotNetCoreTest(project.GetDirectory().FullPath, settings);
+    }
+});
+
 
 Task("Pack")
     .IsDependentOn("Restore")
@@ -90,7 +104,7 @@ Task("Restore")
 
 Task("Default")
   .IsDependentOn("Build")
-  .IsDependentOn("RunTests")
+  .IsDependentOn("RunUnitTests")
   .IsDependentOn("Pack");
 
 RunTarget(target);
