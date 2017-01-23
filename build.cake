@@ -7,6 +7,7 @@ var configuration   = Argument<string>("configuration", "Release");
 var isLocalBuild        = !AppVeyor.IsRunningOnAppVeyor;
 var sourcePath          = Directory("./src");
 var testsPath           = Directory("test");
+var samplesPath			= Directory("sample");
 var buildArtifacts      = Directory("./artifacts/packages");
 
 Task("Build")
@@ -86,6 +87,7 @@ Task("Restore")
 
     DotNetCoreRestore(sourcePath, settings);
     DotNetCoreRestore(testsPath, settings);
+	DotNetCoreRestore(samplesPath, settings);
 });
 
 Task("Default")
