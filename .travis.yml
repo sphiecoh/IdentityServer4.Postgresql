@@ -1,6 +1,6 @@
 language: csharp
 mono: 4.4.2
-dotnet: 1.0.0-preview2-003121
+dotnet: 1.1.0
 sudo: required
 dist: trusty
 env:
