@@ -28,12 +28,12 @@ Task("RunTests")
 {
 	var settings = new DotNetCoreTestSettings{
 		NoBuild = true,
-
+		Configuration = "Release"
 	}; 
 	
 	DotNetCoreTest("./test/IdentityServer4.Postgresql.UnitTests/IdentityServer4.Postgresql.UnitTests.csproj",settings);
 	 if(isLocalBuild)
-	 DotNetCoreTest("./test/IdentityServer4.Postgresql.IntegrationTests/IdentityServer4.Postgresql.IntegrationTests.csproj",settings);
+	 DotNetCoreTest("./test/IdentityServer4.Postgresql.IntegrationTests/IdentityServer4.Postgresql.IntegrationTests.csproj");
 	
 });
 
