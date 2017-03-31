@@ -76,10 +76,11 @@ namespace IdentityServer4.Postgresql.Sample
                     {
                           new Entities.Client
                             {
+                              AllowOfflineAccess = true,
                                 Id = "ro.client",
                                 ClientId ="ro.client",
                                 ClientName = "mvc",
-                                AllowedGrantTypes =  new List<ClientGrantType> { new ClientGrantType { GrantType = GrantType.Hybrid } , new ClientGrantType {  GrantType = GrantType.ClientCredentials} },
+                                AllowedGrantTypes =  new List<ClientGrantType> { new ClientGrantType { GrantType = GrantType.Hybrid } },
                                 AllowedCorsOrigins =  new List<ClientCorsOrigin>  {new ClientCorsOrigin { Origin = "http://localhost:5003" } },
                                 RequireClientSecret = true,
                                 ClientSecrets = new List<ClientSecret> { new ClientSecret { Value = "secret".Sha256() }  },
@@ -89,7 +90,9 @@ namespace IdentityServer4.Postgresql.Sample
                                      new ClientScope { Scope = IdentityServer4.IdentityServerConstants.StandardScopes.Profile },
                                      new ClientScope { Scope ="api1" }
                                 },
-                                RedirectUris = new List<ClientRedirectUri> { new ClientRedirectUri { RedirectUri ="http://localhost:5003/signin-oidc" } }
+                                RedirectUris = new List<ClientRedirectUri> { new ClientRedirectUri { RedirectUri ="http://localhost:5003/signin-oidc" }
+                                }
+                                
                             }
 
                         };

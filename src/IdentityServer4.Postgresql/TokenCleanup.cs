@@ -19,13 +19,11 @@ namespace IdentityServer4.Postgresql
         private CancellationTokenSource _source;
         public TokenCleanup(IServiceProvider serviceProvider, ILogger<TokenCleanup> logger, TokenCleanupOptions options)
         {
-            if (serviceProvider == null) throw new ArgumentNullException(nameof(serviceProvider));
-            if (logger == null) throw new ArgumentNullException(nameof(logger));
             if (options == null) throw new ArgumentNullException(nameof(options));
             if (options.Interval < 1) throw new ArgumentException("interval must be more than 1 second");
 
-            _logger = logger;
-            _serviceProvider = serviceProvider;
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
             _interval = TimeSpan.FromSeconds(options.Interval);
         }
 

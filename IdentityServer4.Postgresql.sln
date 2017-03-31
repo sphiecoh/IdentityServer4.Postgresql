@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8FB52215-A7E9-47A1-9AF6-0D0CE6DF4C02}"
 EndProject
@@ -12,23 +12,22 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		build.cake = build.cake
 		build.ps1 = build.ps1
 		build.sh = build.sh
-		global.json = global.json
 		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{2F0AB968-146B-44BC-B810-5E817A5524FE}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "IdentityServer4.Postgresql.UnitTests", "test\IdentityServer4.Postgresql.UnitTests\IdentityServer4.Postgresql.UnitTests.xproj", "{9547F29B-CB5A-4BA9-B771-D7892D2DEE57}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "IdentityServer4.Postgresql.IntegrationTests", "test\IdentityServer4.Postgresql.IntegrationTests\IdentityServer4.Postgresql.IntegrationTests.xproj", "{A10762F4-65B7-4268-A08F-BFD7973AEB2A}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "IdentityServer4.Postgresql", "src\IdentityServer4.Postgresql\IdentityServer4.Postgresql.xproj", "{2EE8C4E7-81C1-4AB5-9CEF-4F5400B81A6C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{C75E7D2C-9ED5-441A-A7A3-CD871E09CB37}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "IdentityServer4.Postgresql.Srv", "sample\IdentityServer4.Postgresql.Sample\IdentityServer4.Postgresql.Srv.xproj", "{19A56563-94EE-47A2-8342-8294B331B1C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer4.Postgresql.UnitTests", "test\IdentityServer4.Postgresql.UnitTests\IdentityServer4.Postgresql.UnitTests.csproj", "{9547F29B-CB5A-4BA9-B771-D7892D2DEE57}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ConsoleClient", "sample\ConsoleClient\ConsoleClient.xproj", "{25457089-ECDB-4A22-8903-DFF390DAD10C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer4.Postgresql.IntegrationTests", "test\IdentityServer4.Postgresql.IntegrationTests\IdentityServer4.Postgresql.IntegrationTests.csproj", "{A10762F4-65B7-4268-A08F-BFD7973AEB2A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer4.Postgresql", "src\IdentityServer4.Postgresql\IdentityServer4.Postgresql.csproj", "{2EE8C4E7-81C1-4AB5-9CEF-4F5400B81A6C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer4.Postgresql.Sample", "sample\IdentityServer4.Postgresql.Sample\IdentityServer4.Postgresql.Sample.csproj", "{19A56563-94EE-47A2-8342-8294B331B1C0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleClient", "sample\ConsoleClient\ConsoleClient.csproj", "{25457089-ECDB-4A22-8903-DFF390DAD10C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
