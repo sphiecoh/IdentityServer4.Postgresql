@@ -2,7 +2,8 @@
 
   <PropertyGroup>
     <Description>Marten persistence layer for IdentityServer4 using postgresql as a document store</Description>
-    <VersionPrefix>2.0.0-rc1</VersionPrefix>
+    <VersionPrefix>-beta01</VersionPrefix>
+    <Version>2.0.1</Version>
     <Authors>Sifiso Shezi</Authors>
     <TargetFrameworks>netstandard1.4;net46</TargetFrameworks>
     <AssemblyName>IdentityServer4.Postgresql</AssemblyName>

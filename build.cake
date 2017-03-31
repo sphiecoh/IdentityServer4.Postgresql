@@ -1,3 +1,5 @@
+#tool "nuget:?package=xunit.runner.console"
+
 var target          = Argument("target", "Default");
 var configuration   = Argument<string>("configuration", "Release");
 
@@ -15,37 +17,24 @@ Task("Build")
     .IsDependentOn("Restore")
     .Does(() =>
 {
-	var projects = GetFiles("./**/project.json");
-
-	foreach(var project in projects)
-	{
-        var settings = new DotNetCoreBuildSettings 
-        {
-            Configuration = configuration
-            // Runtime = IsRunningOnWindows() ? null : "unix-x64"
-        };
-
-	    DotNetCoreBuild(project.GetDirectory().FullPath, settings); 
-    }
+	DotNetBuild("IdentityServer4.Postgresql.sln", settings =>
+		settings.SetConfiguration("Release")
+        .WithTarget("Build")); 
+   
 });
 
 Task("RunTests")
-    .IsDependentOn("Restore")
-    .IsDependentOn("Clean")
     .Does(() =>
 {
-    var projects = GetFiles("./test/**/project.json");
+	var settings = new DotNetCoreTestSettings{
+		NoBuild = true,
 
-    foreach(var project in projects)
-	{
-        var settings = new DotNetCoreTestSettings
-        {
-            Configuration = configuration
-        };
-        if((!IsRunningOnWindows() || !isLocalBuild )  && project.GetDirectory().FullPath.Contains("IntegrationTests"))
-            continue;
-         DotNetCoreTest(project.GetDirectory().FullPath, settings);
-    }
+	}; 
+	
+	DotNetCoreTest("./test/IdentityServer4.Postgresql.UnitTests/IdentityServer4.Postgresql.UnitTests.csproj",settings);
+	 if(isLocalBuild)
+	 DotNetCoreTest("./test/IdentityServer4.Postgresql.IntegrationTests/IdentityServer4.Postgresql.IntegrationTests.csproj",settings);
+	
 });
 
 Task("Pack")
@@ -62,7 +51,7 @@ Task("Pack")
     {
         settings.VersionSuffix = "build" + AppVeyor.Environment.Build.Number.ToString().PadLeft(5,'0');
     }
-   var projects = GetFiles("./src/**/*.xproj");
+   var projects = GetFiles("./src/**/*.csproj");
     foreach(var project in projects)
   {
        DotNetCorePack(project.GetDirectory().FullPath, settings);
@@ -85,9 +74,8 @@ Task("Restore")
         Sources = new [] { "https://api.nuget.org/v3/index.json" }
     };
 
-    DotNetCoreRestore(sourcePath, settings);
-    DotNetCoreRestore(testsPath, settings);
-	DotNetCoreRestore(samplesPath, settings);
+    DotNetCoreRestore("IdentityServer4.Postgresql.sln", settings);
+  
 });
 
 Task("Default")
