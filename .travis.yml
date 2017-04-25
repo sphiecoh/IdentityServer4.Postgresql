@@ -18,7 +18,10 @@ addons:
     
 script: 
     - chmod +x build.sh
-    - ./build.sh
+    #- ./build.sh
+    - dotnet restore
+    - dotnet build
+    
 notifications:
   email:
     - sfiso.dlaba@gmail.com
