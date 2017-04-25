@@ -17,9 +17,7 @@ Task("Build")
     .IsDependentOn("Restore")
     .Does(() =>
 {
-	DotNetBuild("IdentityServer4.Postgresql.sln", settings =>
-		settings.SetConfiguration("Release")
-        .WithTarget("Build")); 
+	DotNetCoreBuild("IdentityServer4.Postgresql.sln"); 
    
 });
 
