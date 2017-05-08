@@ -2,7 +2,7 @@
 
 var target          = Argument("target", "Default");
 var configuration   = Argument<string>("configuration", "Release");
-var framework		= Argument<string>("tfm");
+var framework		= Argument<string>("tfm",string.Empty);
 
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL VARIABLES
