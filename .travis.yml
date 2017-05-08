@@ -20,7 +20,7 @@ script:
     - chmod +x build.sh
     #- ./build.sh
     - dotnet restore
-    - dotnet build
+    - dotnet build -f netstandard1.4
     
 notifications:
   email:

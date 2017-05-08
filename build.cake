@@ -2,6 +2,7 @@
 
 var target          = Argument("target", "Default");
 var configuration   = Argument<string>("configuration", "Release");
+var framework		= Argument<string>("tfm");
 
 ///////////////////////////////////////////////////////////////////////////////
 // GLOBAL VARIABLES
@@ -17,7 +18,12 @@ Task("Build")
     .IsDependentOn("Restore")
     .Does(() =>
 {
-	DotNetCoreBuild("IdentityServer4.Postgresql.sln"); 
+	var settings = new DotNetCoreBuildSettings
+     {
+         Framework = framework,
+         Configuration = configuration
+     };
+	DotNetCoreBuild("IdentityServer4.Postgresql.sln", settings); 
    
 });
 
