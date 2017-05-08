@@ -44,6 +44,9 @@ namespace IdentityServer4.Postgresql.Extensions
         public static IIdentityServerBuilder AddConfigurationStore(
         this IIdentityServerBuilder builder, MartenOptions options)
         {
+            if (options == null)
+                throw new ArgumentNullException(nameof(options));
+
             builder.Services.AddTransient<IClientStore, ClientStore>();
             builder.Services.AddTransient<IResourceStore, ResourceStore>();
             builder.Services.AddTransient<ICorsPolicyService, CorsPolicyService>();
