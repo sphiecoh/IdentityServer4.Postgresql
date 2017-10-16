@@ -2,30 +2,28 @@
 
   <PropertyGroup>
     <Description>Marten persistence layer for IdentityServer4 using postgresql as a document store</Description>
-    <VersionPrefix>-beta01</VersionPrefix>
-    <Version>2.0.2</Version>
+    <VersionPrefix></VersionPrefix>
+    <Version>2.0.3</Version>
     <Authors>Sifiso Shezi</Authors>
-    <TargetFrameworks>netstandard1.4;net46</TargetFrameworks>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
     <AssemblyName>IdentityServer4.Postgresql</AssemblyName>
     <PackageId>IdentityServer4.Postgresql</PackageId>
     <PackageTags>OAuth2;OAuth 2.0;OpenID Connect;Security;Identity;IdentityServer;Postgresql</PackageTags>
     <PackageProjectUrl>https://github.com/Sphiecoh/IdentityServer4.Postgresql</PackageProjectUrl>
-    <NetStandardImplicitPackageVersion>1.6.1</NetStandardImplicitPackageVersion>
-    <PackageTargetFallback Condition=" '$(TargetFramework)' == 'netstandard1.4' ">$(PackageTargetFallback);dotnet5.6;portable-net45+win8</PackageTargetFallback>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="IdentityServer4" Version="1.4.1" />
-    <PackageReference Include="Marten" Version="1.4.1" />
-    <PackageReference Include="AutoMapper" Version="6.0.2" />
+    <PackageReference Include="IdentityServer4" Version="2.0.1" />
+    <PackageReference Include="Marten" Version="2.3.2" />
+    <PackageReference Include="AutoMapper" Version="6.1.1" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net46' ">
+  <!--<ItemGroup Condition=" '$(TargetFramework)' == 'net46' ">
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
-  </ItemGroup>
+  </ItemGroup>-->
 
 </Project>
