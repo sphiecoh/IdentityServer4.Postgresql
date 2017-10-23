@@ -12,7 +12,7 @@ namespace IdentityServer4.Postgresql.IntegrationTests
             
 			this.Store = DocumentStore.For(c => 
             {
-                c.Connection("User ID=sa;Password=skhokho;Host=localhost;Port=5432;Database=idsrv4_test;");
+                c.Connection($"User ID={GetEnv("PG_USER","sa")};Password={GetEnv("PG_PASSWORD","skhokho")};Host={GetEnv("PG_HOST","localhost")};Port={GetEnv("PG_PORT","5432")};Database={GetEnv("PG_DATABASE","idsrv4_test")};");
                 c.PLV8Enabled = false;
                 
             });
@@ -22,6 +22,10 @@ namespace IdentityServer4.Postgresql.IntegrationTests
 		{
 			Store.Advanced.Clean.DeleteAllDocuments();
 			Store.Dispose();
+		}
+		private string GetEnv(string name, string defaultVal)
+		{
+			return Environment.GetEnvironmentVariable(name) ?? defaultVal; 
 		}
 	}
 }
