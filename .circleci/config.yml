@@ -3,14 +3,21 @@ jobs:
    build:
      docker:
        - image: microsoft/dotnet:latest
-       - image: postgres:9.5
+       - image: postgres:9.6.2-alpine
         environment:
         - POSTGRES_USER=sa
         - POSTGRES_DB=idsrv4_test
         - POSTGRES_PASSWORD=skhokho
      steps:
        - checkout
-       - run: 
-          command: dotnet restore
-          command: dotnet test test/IdentityServer4.Postgresql.UnitTests
-          command: dotnet test test/IdentityServer4.Postgresql.IntegrationTests
+       - run:
+          name: install dockerize
+          command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+          environment:
+            DOCKERIZE_VERSION: v0.3.0
+       - run:
+          name: Wait for db
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+       - run: dotnet restore
+       - run: dotnet test test/IdentityServer4.Postgresql.UnitTests
+       - run: dotnet test test/IdentityServer4.Postgresql.IntegrationTests
