@@ -1,0 +1,16 @@
+version: 2
+jobs:
+   build:
+     docker:
+       - image: microsoft/dotnet:latest
+       - image: postgres:9.5
+        environment:
+        - POSTGRES_USER=sa
+        - POSTGRES_DB=idsrv4_test
+        - POSTGRES_PASSWORD=skhokho
+     steps:
+       - checkout
+       - run: 
+          command: dotnet restore
+          command: dotnet test test/IdentityServer4.Postgresql.UnitTests
+          command: dotnet test test/IdentityServer4.Postgresql.IntegrationTests
