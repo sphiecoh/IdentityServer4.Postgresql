@@ -3,11 +3,13 @@ jobs:
    build:
      docker:
        - image: microsoft/dotnet:latest
+
        - image: postgres:9.6.2-alpine
           environment:
             - POSTGRES_USER=sa
             - POSTGRES_DB=idsrv4_test
             - POSTGRES_PASSWORD=skhokho
+            
      steps:
        - checkout
        - run:
@@ -26,3 +28,9 @@ jobs:
           command: dotnet build
        - run: dotnet test test/IdentityServer4.Postgresql.UnitTests
        - run: dotnet test test/IdentityServer4.Postgresql.IntegrationTests
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      
