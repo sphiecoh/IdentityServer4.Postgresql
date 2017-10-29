@@ -1,6 +1,6 @@
 language: csharp
 mono: 4.4.2
-dotnet: 1.0.1
+dotnet: 2.0.0
 sudo: required
 dist: trusty
 env:
@@ -20,7 +20,7 @@ script:
     - chmod +x build.sh
     #- ./build.sh
     - dotnet restore
-    - dotnet build -f netstandard1.4
+    - dotnet build
     
 notifications:
   email:
