@@ -19,7 +19,7 @@ namespace IdentityServer4.Postgresql.Services
         }
         public async Task<bool> IsOriginAllowedAsync(string origin)
         {
-            var origins = await _documentSession.Query<Client>().SelectMany(x => x.AllowedCorsOrigins.Select(y => y.Origin)).ToListAsync().ConfigureAwait(false);
+            var origins = await _documentSession.Query<Client>().SelectMany(x => x.AllowedCorsOrigins).Select(y => y.Origin).ToListAsync().ConfigureAwait(false);
             var distinctOrigins = origins.Where(x => x != null).Distinct();
             var isAllowed = distinctOrigins.Any(x => x.ToLower() == origin.ToLower());
 
