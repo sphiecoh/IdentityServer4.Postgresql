@@ -19,7 +19,6 @@ namespace IdentityServer4.Postgresql.Mappers
                     opt => opt.MapFrom(src => src.PostLogoutRedirectUris.Select(x => x.PostLogoutRedirectUri)))
                 .ForMember(x => x.AllowedScopes, opt => opt.MapFrom(src => src.AllowedScopes.Select(x => x.Scope)))
                 .ForMember(x => x.ClientSecrets, opt => opt.MapFrom(src => src.ClientSecrets.Select(x => x)))
-                .ForMember(x => x.Claims, opt => opt.MapFrom(src => src.Claims.Select(x => new System.Security.Claims.Claim(x.Type, x.Value))))
                 .ForMember(x => x.IdentityProviderRestrictions,
                     opt => opt.MapFrom(src => src.IdentityProviderRestrictions.Select(x => x.Provider)))
                 .ForMember(x => x.AllowedCorsOrigins,
@@ -42,8 +41,6 @@ namespace IdentityServer4.Postgresql.Mappers
                                     x => new ClientPostLogoutRedirectUri { PostLogoutRedirectUri = x })))
                 .ForMember(x => x.AllowedScopes,
                     opt => opt.MapFrom(src => src.AllowedScopes.Select(x => new ClientScope { Scope = x })))
-                .ForMember(x => x.Claims,
-                    opt => opt.MapFrom(src => src.Claims.Select(x => new ClientClaim { Type = x.Type, Value = x.Value })))
                 .ForMember(x => x.IdentityProviderRestrictions,
                     opt =>
                         opt.MapFrom(
