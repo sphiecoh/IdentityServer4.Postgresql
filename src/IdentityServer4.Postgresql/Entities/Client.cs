@@ -48,6 +48,10 @@ namespace IdentityServer4.Postgresql.Entities
 		public bool PrefixClientClaims { get; set; } = true;
 		public List<ClientCorsOrigin> AllowedCorsOrigins { get; set; }
 		public bool AlwaysIncludeUserClaimsInIdToken { get; set; }
+		public string Description { get; set; }
+		public int? UserSsoLifetime { get; set; }
+		public string UserCodeType { get; set; }
+		public int DeviceCodeLifetime { get; set; }
 		/// <summary>
 		/// Specifies logout URI at client for HTTP front-channel based logout.
 		/// </summary>
