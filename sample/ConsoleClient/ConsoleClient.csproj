@@ -12,7 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="IdentityModel" Version="2.3.1" />
+    <PackageReference Include="IdentityModel" Version="3.10.1" />
   </ItemGroup>
 
 </Project>
