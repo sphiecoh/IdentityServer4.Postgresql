@@ -15,7 +15,7 @@
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="IdentityServer4" Version="2.3.2" />
+    <PackageReference Include="IdentityServer4" Version="2.4.0" />
     <PackageReference Include="Marten" Version="3.4.0" />
     <PackageReference Include="AutoMapper" Version="8.0.0" />
   </ItemGroup>
