@@ -79,6 +79,18 @@ namespace IdentityServer4.Postgresql.Extensions
             builder.Services.AddSingleton<TokenCleanup>();
             return builder;
         }
+
+        public static IIdentityServerBuilder AddOperationalStore(this IIdentityServerBuilder builder, MartenOptions options, Action<TokenCleanupOptions> tokenCleanUpOptions = null)
+        {
+            builder.Services.AddScoped<IPersistedGrantStore, PersistedGrantStore>();
+            var tokenCleanupOptions = new TokenCleanupOptions();
+            tokenCleanUpOptions?.Invoke(tokenCleanupOptions);
+            builder.Services.AddSingleton(tokenCleanupOptions);
+            builder.Services.AddSingleton<TokenCleanup>();
+            ConfigureMarten(builder, options);
+            return builder;
+        }
+
         public static IApplicationBuilder UseIdentityServerTokenCleanup(this IApplicationBuilder app, IApplicationLifetime applicationLifetime)
         {
             var tokenCleanup = app.ApplicationServices.GetService<TokenCleanup>();
