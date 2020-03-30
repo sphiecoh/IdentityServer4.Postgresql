@@ -27,7 +27,7 @@ namespace IdentityServer4.Postgresql.Stores
 			if (scopeNames == null) throw new ArgumentNullException(nameof(scopeNames));
 
 			var resources = _documentSession.Query<Entities.ApiResource>().ToList();
-			return Task.FromResult(resources.Where(x => scopeNames.Contains(x.Name)).Select(x => x.ToModel()).AsEnumerable());
+			return Task.FromResult(resources.Where(x => x.Scopes.Any(s => scopeNames.Contains(s.Name))).Select(x => x.ToModel()).AsEnumerable());
 		}
 
 		public Task<IEnumerable<IdentityResource>> FindIdentityResourcesByScopeAsync(IEnumerable<string> scopeNames)

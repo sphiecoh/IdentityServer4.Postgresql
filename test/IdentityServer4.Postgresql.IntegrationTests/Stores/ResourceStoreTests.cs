@@ -38,7 +38,7 @@ namespace IdentityServer4.Postgresql.IntegrationTests.Stores
 		public async Task FindApiResourcesByScopeAsync_ShouldFindByScopes()
 		{
 			A.Configure<ApiResource>().Fill(x => x.UserClaims, A.ListOf<ApiResourceClaim>(2));
-			A.Configure<ApiResource>().Fill(x => x.Scopes, A.ListOf<ApiScope>());
+			A.Configure<ApiResource>().Fill(x => x.Scopes, A.ListOf<ApiScope>(3));
 
 
 			var apiResources = A.ListOf<ApiResource>(5);
@@ -51,7 +51,7 @@ namespace IdentityServer4.Postgresql.IntegrationTests.Stores
 			using (var session = db.Store.LightweightSession())
 			{
 				var store = new ResourceStore(session);
-				var _scopes = apiResources.Select(y => y.Name);
+				var _scopes = apiResources.SelectMany(p => p.Scopes.Select(o => o.Name));
 				var result = await store.FindApiResourcesByScopeAsync(_scopes);
 				Assert.True(apiResources.Count == result.Count());
 			}
