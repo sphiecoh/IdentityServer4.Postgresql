@@ -21,4 +21,11 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerF
  }
  ```
  This will register all the `IdentityServer` stores and optionally a Marten's `IDocumentSession` as well as `IDocumentStore` if you pass a connection string;
+
+ ## Acknowledgements
+IdentityServer4.Postresql is built using the following great open source projects :
+
+* [Martendb](https://martendb.io/)
+* [XUnit](https://xunit.github.io/)
+
  
