@@ -89,5 +89,11 @@ namespace IdentityServer4.Postgresql.Entities
 		/// The properties.
 		/// </value>
 		public IDictionary<string, string> Properties { get; set; } = new Dictionary<string, string>();
+		public string Description { get; set; }
+		public int? UserSsoLifetime { get; set; }
+		public string UserCodeType { get; set; }
+		public int DeviceCodeLifetime { get; set; } = 300;
+		
+
 	}
 }

@@ -3,6 +3,7 @@ using IdentityServer4.Postgresql.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace IdentityServer4.Postgresql.Mappers
@@ -11,7 +12,10 @@ namespace IdentityServer4.Postgresql.Mappers
     {
         public ClientMapperProfile()
         {
+            // entity to model
             CreateMap<Client, Models.Client>(MemberList.Destination)
+                .ForMember(x => x.Properties,
+                    opt => opt.MapFrom(src => src.Properties.ToDictionary(item => item.Key, item => item.Value)))
                 .ForMember(x => x.AllowedGrantTypes,
                     opt => opt.MapFrom(src => src.AllowedGrantTypes.Select(x => x.GrantType)))
                 .ForMember(x => x.RedirectUris, opt => opt.MapFrom(src => src.RedirectUris.Select(x => x.RedirectUri)))
@@ -19,7 +23,7 @@ namespace IdentityServer4.Postgresql.Mappers
                     opt => opt.MapFrom(src => src.PostLogoutRedirectUris.Select(x => x.PostLogoutRedirectUri)))
                 .ForMember(x => x.AllowedScopes, opt => opt.MapFrom(src => src.AllowedScopes.Select(x => x.Scope)))
                 .ForMember(x => x.ClientSecrets, opt => opt.MapFrom(src => src.ClientSecrets.Select(x => x)))
-                .ForMember(x => x.Claims, opt => opt.MapFrom(src => src.Claims.Select(x => new System.Security.Claims.Claim(x.Type, x.Value))))
+                .ForMember(x => x.Claims, opt => opt.MapFrom(src => src.Claims.Select(x => new Claim(x.Type, x.Value))))
                 .ForMember(x => x.IdentityProviderRestrictions,
                     opt => opt.MapFrom(src => src.IdentityProviderRestrictions.Select(x => x.Provider)))
                 .ForMember(x => x.AllowedCorsOrigins,
@@ -30,6 +34,8 @@ namespace IdentityServer4.Postgresql.Mappers
 
             // model to entity
             CreateMap<Models.Client, Client>(MemberList.Source)
+                .ForMember(x => x.Properties,
+                    opt => opt.MapFrom(src => src.Properties.ToList().Select(x => new ClientProperty { Key = x.Key, Value = x.Value })))
                 .ForMember(x => x.AllowedGrantTypes,
                     opt => opt.MapFrom(src => src.AllowedGrantTypes.Select(x => new ClientGrantType { GrantType = x })))
                 .ForMember(x => x.RedirectUris,

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Description>Marten persistence layer for IdentityServer4 using postgresql as a document store</Description>
     <VersionPrefix></VersionPrefix>
-    <Version>2.0.5</Version>
+    <Version>2.0.6</Version>
     <Authors>Sifiso Shezi</Authors>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <AssemblyName>IdentityServer4.Postgresql</AssemblyName>
@@ -15,11 +15,10 @@
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="IdentityServer4" Version="2.3.2" />
-    <PackageReference Include="Marten" Version="3.4.0" />
-    <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="IdentityServer4" Version="2.5.4" />
+    <PackageReference Include="Marten" Version="3.11.0" />
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
   </ItemGroup>
-
   <!--<ItemGroup Condition=" '$(TargetFramework)' == 'net46' ">
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
