@@ -12,12 +12,13 @@ using Marten;
 using IdentityServer4.Models;
 using IdentityServer4.Postgresql.Mappers;
 using IdentityServer4.Postgresql.Entities;
+using IdentityServer4.Stores;
 
 namespace IdentityServer4.Postgresql.Sample
 {
 	public class Startup
 	{
-		private const string connection = "host=localhost;database=sample;user id=postgres; Password=skhokho";
+		private const string connection = "host=localhost;database=idsrv4_test;user id=sa; Password=skhokho";
 		// This method gets called by the runtime. Use this method to add services to the container.
 		// For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
 		public void ConfigureServices(IServiceCollection services)
@@ -38,12 +39,15 @@ namespace IdentityServer4.Postgresql.Sample
 
 			app.Run(async (context) =>
 			{
-				await context.Response.WriteAsync("Hello World!");
+				var clientStore = context.RequestServices.GetService<IClientStore>();
+				var client  = await clientStore.FindClientByIdAsync("ro.client");
+				await context.Response.WriteAsync(Newtonsoft.Json.JsonConvert.SerializeObject(client));
 			});
 		}
 
 		private void InitData(IApplicationBuilder app)
 		{
+		
 			var store = DocumentStore.For(connection);
 			store.Advanced.Clean.CompletelyRemoveAll();
 			using (var session = store.LightweightSession())
@@ -57,9 +61,9 @@ namespace IdentityServer4.Postgresql.Sample
 					session.StoreObjects(resources);
 				}
 
-				if (!session.Query<IdentityServer4.Postgresql.Entities.IdentityResource>().Any())
+				if (!session.Query<Entities.IdentityResource>().Any())
 				{
-					var resources = new List<IdentityServer4.Postgresql.Entities.IdentityResource> {
+					var resources = new List<Entities.IdentityResource> {
 						new IdentityResources.OpenId().ToEntity(),
 						new IdentityResources.Profile().ToEntity(),
 						new IdentityResources.Email().ToEntity(),
@@ -67,9 +71,9 @@ namespace IdentityServer4.Postgresql.Sample
 					};
 					session.StoreObjects(resources);
 				}
-				if (!session.Query<IdentityServer4.Postgresql.Entities.Client>().Any())
+				if (!session.Query<Entities.Client>().Any())
 				{
-					var clients = new List<IdentityServer4.Postgresql.Entities.Client>
+					var clients = new List<Entities.Client>
 					{
 						  new Entities.Client
 							{
@@ -83,12 +87,12 @@ namespace IdentityServer4.Postgresql.Sample
 								ClientSecrets = new List<ClientSecret> { new ClientSecret { Value = "secret".Sha256() }  },
 								RequireConsent = false,
 								AllowedScopes = new List<ClientScope>{
-									 new ClientScope { Scope = IdentityServer4.IdentityServerConstants.StandardScopes.OpenId },
-									 new ClientScope { Scope = IdentityServer4.IdentityServerConstants.StandardScopes.Profile },
+									 new ClientScope { Scope = IdentityServerConstants.StandardScopes.OpenId },
+									 new ClientScope { Scope = IdentityServerConstants.StandardScopes.Profile },
 									 new ClientScope { Scope ="api1" }
 								},
 								RedirectUris = new List<ClientRedirectUri> { new ClientRedirectUri { RedirectUri ="http://localhost:5003/signin-oidc" }
-								}
+								}, Claims = new List<ClientClaim>{ new ClientClaim { Value = "test" , Type = "TestType" } }
 
 							}
 
