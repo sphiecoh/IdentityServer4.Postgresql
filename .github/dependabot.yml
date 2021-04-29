@@ -1,0 +1,23 @@
+version: 2
+updates:
+- package-ecosystem: nuget
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "03:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: FakeItEasy
+    versions:
+    - 6.2.1
+    - 7.0.0
+  - dependency-name: Microsoft.NET.Test.Sdk
+    versions:
+    - 16.8.3
+    - 16.9.1
+  - dependency-name: Marten
+    versions:
+    - 3.13.3
+  - dependency-name: IdentityServer4
+    versions:
+    - 4.1.1
